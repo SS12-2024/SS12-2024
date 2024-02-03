@@ -17,6 +17,33 @@ This project aims to create an accessible version of the popular game "Geometry 
 - **Vibrations:** Haptic feedback to enhance the gaming experience.
 
 ## Project Components
+* Constant movement
+* Random obstacles
+* Color/sound based obstacles (associated with input)
+* Vibration (loss)
+* Leaderboard
+* Announcments
+* Gets harder
+
+## Requirements 
+
+* Game for either desktop/android/iOS ​
+* Using and integrating with OS level a11y APIs ​
+* Way to save progress at any given point ​
+* Leaderboards ​
+* Multiple levels and difficulties ​
+* Auditory cues attached to decisions/moves/options selected ​
+* Follow ADA compliance ​
+
+## What APIs do we need?
+
+* Speech Recognition
+* Vibration API
+* Text to Speech
+* Accelerators and Gyroscopes
+* Speakers
+* Ally
+
 1. **Constant Movement:** Player character moves continuously.
 2. **Random Obstacles:** Dynamic placement of obstacles for increased challenge.
 3. **Color/Sound-Based Obstacles:** Obstacles associated with input, providing a multi-sensory experience.
@@ -42,16 +69,9 @@ This project aims to create an accessible version of the popular game "Geometry 
 5. [Speakers](https://docs.expo.dev/versions/latest/sdk/audio/): Output audio cues and announcements.
 6. [Accessibility (Ally)](https://docs.expo.dev/versions/latest/sdk/accessibility/): Ensure compliance with accessibility standards.
 
-## Game Engine
-The project utilizes the [React Native Game Engine](https://github.com/bberak/react-native-game-engine) for game development.
-
 ## Getting Started
 1. Clone the repository.
 2. Install dependencies with `npm install`.
 3. Follow Expo documentation for [setting up the project](https://docs.expo.dev/).
 4. Integrate the mentioned APIs following Expo documentation.
 5. Run the project using `expo start`.
-
-Feel free to explore each API documentation for detailed integration instructions and examples.
-
-Happy hacking! 🚀✨
