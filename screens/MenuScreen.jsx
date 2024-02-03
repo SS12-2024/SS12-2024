@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Button, Text, AccessibilityInfo, findNodeHandle, StyleSheet } from 'react-native';
-import { styles } from './styles/MenuStyles.js'
+import { View, StyleSheet, AccessibilityInfo } from 'react-native';
 import CustomButton from '../components/common/CustomButton';
 
 const MenuScreen = ({ navigation }) => {
@@ -22,6 +21,7 @@ const MenuScreen = ({ navigation }) => {
             <CustomButton
                 title="Leaderboard"
                 onPress={() => navigation.navigate('Leaderboard')}
+                buttonStyle={styles.button}
                 textStyle={{ color: 'white', fontSize: 50 }}
                 accessibilityLabel="View the leaderboard"
             />
@@ -36,5 +36,18 @@ const MenuScreen = ({ navigation }) => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'stretch', // Align items to take up the entire width
+        backgroundColor: '#1F1A38', // Dark purple
+    },
+    button: {
+        flex: 1, // Each button takes equal space
+        margin: 8, // Add some margin for better spacing
+    },
+});
 
 export default MenuScreen;
