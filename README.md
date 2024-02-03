@@ -1,6 +1,4 @@
-Great project planning! Here's a structured readme for your CSUN Hackathon project:
 
----
 
 # Team One: CSUN Hackathon Project
 
@@ -40,7 +38,8 @@ This project aims to create an accessible version of the popular game "Geometry 
 3. [Text to Speech](https://docs.expo.dev/versions/latest/sdk/speech/): Convert text announcements to speech.
 4. [Accelerometer and Gyroscope](https://docs.expo.dev/versions/latest/sdk/accelerometer/): Utilize device motion for interactive gameplay.
 5. [Speakers](https://docs.expo.dev/versions/latest/sdk/audio/): Output audio cues and announcements.
-6. [Accessibility (Ally)](https://docs.expo.dev/versions/latest/sdk/accessibility/): Ensure compliance with accessibility standards.
+6. [Gesture Handler API](https://docs.expo.dev/versions/latest/sdk/gesture-handler/): Enhance interactive gameplay with advanced gesture recognition capabilities.
+
 
 ## Game Engine
 The project utilizes the [React Native Game Engine](https://github.com/bberak/react-native-game-engine) for game development.
@@ -55,3 +54,5 @@ The project utilizes the [React Native Game Engine](https://github.com/bberak/re
 Feel free to explore each API documentation for detailed integration instructions and examples.
 
 Happy hacking! 🚀✨
+
+Certainly! Here's the added line for the Gesture Handler API in your README:
