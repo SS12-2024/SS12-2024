@@ -1,0 +1,17 @@
+{
+    "source": {
+      "include": ["./"],
+      "exclude": [
+        "node_modules",
+        ".expo",
+        "expo-speech-to-text"
+      ],
+      "includePattern": ".+\\.js(doc|x)?$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+      "recurse": true,
+      "destination": "./docs"
+    }
+  }
+  
