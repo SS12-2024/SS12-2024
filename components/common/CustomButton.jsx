@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, AccessibilityInfo } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, AccessibilityInfo, Dimensions } from 'react-native';
 
 const CustomButton = ({ title, onPress, buttonStyle, textStyle, accessibilityLabel }) => {
     const announceAccessibilityLabel = accessibilityLabel || title;
@@ -19,19 +19,21 @@ const CustomButton = ({ title, onPress, buttonStyle, textStyle, accessibilityLab
         </TouchableOpacity>
     );
 };
+const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
+        height: screenHeight, // Adjust the height based on the number of buttons
         borderRadius: 4,
         elevation: 3,
+        padding: 0,
+        flex:1,
         backgroundColor: '#1F1A38', // Dark purple
     },
     text: {
-        fontSize: 20,
+        fontSize: 25,
         color: 'white'
     },
 });
