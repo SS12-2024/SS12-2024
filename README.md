@@ -35,4 +35,5 @@ Team One for CSUN Hackathon.
 * Vibration API
 * Text to Speech
 * Accelerators and Gyroscopes
-
+* Speakers
+* Ally
