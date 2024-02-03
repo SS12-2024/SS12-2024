@@ -8,7 +8,7 @@ import { GameProvider } from './context/GameContext';
 const App = () => {
   return (
     <GameProvider>
-      <NavigationContainer>
+      <NavigationContainer >
         <GameNavigator />
       </NavigationContainer>
     </GameProvider>
