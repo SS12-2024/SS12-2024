@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 0,
-    borderRadius: 8,
+    borderRadius: 0,
     marginRight: 8,
   },
   leaderboardButton: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   buttonTextstart: {
     color: 'white',
