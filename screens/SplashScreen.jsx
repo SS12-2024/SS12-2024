@@ -1,63 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import * as Speech from 'expo-speech';
 
+// Constant pitch value
+const CONSTANT_PITCH = 1.2;
+
 export default function App() {
-  const [voices, setVoices] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState(null);
-
-  useEffect(() => {
-    // Fetch available voices on component mount
-    async function fetchVoices() {
-      const availableVoices = await Speech.getAvailableVoicesAsync();
-      setVoices(availableVoices);
-      setSelectedVoice(availableVoices[0]); // Set the default voice
-    }
-
-    fetchVoices();
-  }, []);
-
-  // Function to speak the given text with a specified voice
-  const speakWithVoice = (text, voice) => {
-    Speech.speak(text, { language: 'en', voice });
-  };
-
-  // Function to handle voice selection
-  const handleVoiceChange = (voice) => {
-    setSelectedVoice(voice);
+  // Function to speak the given text with a constant pitch
+  const speakWithConstantPitch = (text) => {
+    Speech.speak(text, { language: 'en', pitch: CONSTANT_PITCH });
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.startButton}
-        onPress={() => speakWithVoice('Start a new game', selectedVoice)}>
+        onPress={() => speakWithConstantPitch('Start a new game')}>
         <Text style={styles.buttonText}>Start a new game</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.leaderboardButton}
-        onPress={() => speakWithVoice('Leadership Board', selectedVoice)}>
+        onPress={() => speakWithConstantPitch('Leadership Board')}>
         <Text style={styles.buttonText}>Leadership Board</Text>
       </TouchableOpacity>
       <Text>Open up App.js to start working on your app!</Text>
-
-      {/* Voice selection UI */}
-      <View style={styles.voiceSelectionContainer}>
-        <Text>Select Voice:</Text>
-        {voices.map((voice) => (
-          <TouchableOpacity
-            key={voice.identifier}
-            style={[
-              styles.voiceButton,
-              voice === selectedVoice && styles.selectedVoiceButton,
-            ]}
-            onPress={() => handleVoiceChange(voice)}>
-            <Text>{voice.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
       <StatusBar style="auto" />
     </View>
   );
@@ -66,42 +33,29 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: '#fff',
-    padding: 16,
+    paddingHorizontal: 16,
   },
   startButton: {
+    flex: 1,
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 12,
     borderRadius: 8,
-    marginBottom: 8,
+    marginRight: 8,
   },
   leaderboardButton: {
+    flex: 1,
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 12,
     borderRadius: 8,
-    marginBottom: 8,
   },
   buttonText: {
     color: 'white',
     textAlign: 'center',
-  },
-  voiceSelectionContainer: {
-    marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  voiceButton: {
-    padding: 8,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'gray',
-  },
-  selectedVoiceButton: {
-    backgroundColor: 'lightgray',
   },
 });
