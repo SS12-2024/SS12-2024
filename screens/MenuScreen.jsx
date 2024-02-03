@@ -25,6 +25,13 @@ const MenuScreen = ({ navigation }) => {
                 textStyle={{ color: 'white', fontSize: 50 }}
                 accessibilityLabel="View the leaderboard"
             />
+            <CustomButton
+                title="Resume Saved Game"
+                onPress={() => navigation.navigate('Gameplay')}
+                buttonStyle={styles.button}
+                textStyle={{ color: 'white', fontSize: 50 }}
+                accessibilityLabel="Resume saved game"
+            />
             {/* More menu items */}
         </View>
     );
