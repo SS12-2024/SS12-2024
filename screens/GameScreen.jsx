@@ -6,6 +6,7 @@ import entities from "../entities";
 import Physics from "../physics";
 const GameScreen = ({ navigation }) => {
   // Announce screen changes for screen readers
+
   useEffect(() => {
     const screenChangeAnnouncement = "Gameplay Screen.";
     AccessibilityInfo.announceForAccessibility(screenChangeAnnouncement);
