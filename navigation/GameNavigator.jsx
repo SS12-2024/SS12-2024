@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 
 const GameNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName="Splash">
+        <Stack.Navigator initialRouteName="Splash" >
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="Tutorial" component={TutorialScreen} />
