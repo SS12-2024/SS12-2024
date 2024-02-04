@@ -68,7 +68,7 @@ const SpawnWalls = (entities, { time }) => {
   if (currentTime - lastSpawnTime > 50) {
     const gapSize = 175;
     const wallHeight = screenHeight / 35;
-    const randomNum = Math.floor(Math.random() * 200) - 100;
+    const randomNum = Math.floor(Math.random() * 100) - 100;
     const divisor = 3;
     let leftWidth = 0;
     if (SpawnWalls.prevLeftWidth - randomNum > 100) {
@@ -158,6 +158,11 @@ const GameScreen = ({ navigation }) => {
     setPoints((prevPoints) => prevPoints + 1);
     console.log("Point:", points);
 
+    if (points == 25) {
+      setRunning(false);
+      navigation.navigate("Menu");
+    }
+
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [startGameTime]);
@@ -179,6 +184,7 @@ const GameScreen = ({ navigation }) => {
           right: 0,
           left: 0,
         }}
+        running={running}
       ></GameEngine>
 
       <StatusBar style="auto" hidden={true} />
