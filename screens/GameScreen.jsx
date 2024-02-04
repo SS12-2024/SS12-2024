@@ -4,6 +4,9 @@ import { GameEngine } from 'react-native-game-engine';
 
 // Game Object Components
 import Wall from '../components/entities/Wall';
+import { useGame } from '../context/GameContext';
+
+
 
 
 const { height: screenHeight } = Dimensions.get('window');
@@ -23,6 +26,7 @@ const MoveWalls = (entities, { time }) => {
   });
   return newEntities;
 };
+
 
 // Spawn walls
 let lastSpawnTime = Date.now();
@@ -72,16 +76,26 @@ const SpawnWalls = (entities, { time }) => {
 
 
 const GameScreen = () => {
-
+  const {startGameTime,setStartGameTime}  = useGame();
+  
   return (
-    <GameEngine
-      style={styles.container}
-      systems={[MoveWalls, SpawnWalls]}
-      entities={{
-        // Initial entities 
-      }}>
-      {/* Other UI components can be added here */}
-    </GameEngine>
+    <View>
+      <GameEngine
+        style={styles.container}
+        systems={[MoveWalls, SpawnWalls]}
+        entities={{
+          // Initial entities 
+        }}>
+        {/* Other UI components can be added here */}
+      </GameEngine>
+
+      <View style={styles.overlayContainer}>
+        <Text style={styles.overlayText}>Score: 100</Text>
+      </View>
+    </View>
+    
+
+
   );
 };
 
@@ -90,6 +104,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  overlayText: {
+    fontSize: 12,
+    color:'white',
+
+  },
+  overlayContainer:{
+    position: 'absolute',
+    top:0,
+    left:0,
+    right:0,
+    alignItems:'center',
+    paddingTop:30,
+  }
 });
 
 export default GameScreen;
