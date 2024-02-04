@@ -6,11 +6,11 @@ const useTextToSpeech = (thingToSay) => {
     Speech.speak(thingToSay);
   };
 
-  useEffect(() => {
-    speak();
-    return () => {
-    };
-  }, [thingToSay]);
+  // useEffect(() => {
+  // speak();
+  //return () => {
+  //};
+  //}, [thingToSay]);
 
   return speak;
 };
