@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, StyleSheet,View,Text } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 
 // Game Object Components
@@ -73,10 +73,19 @@ const SpawnWalls = (entities, { time }) => {
   }
   return entities;
 };
+// const score=(startGameTime,setStartGameTime)=>{
+
+//     return (setStartGameTime-startGameTime)
+// }
 
 
 const GameScreen = () => {
   const {startGameTime,setStartGameTime}  = useGame();
+  
+  useEffect(()=>{
+   const starttime = Date.now();
+   console.log(starttime);
+  },[])
   
   return (
     <View>
