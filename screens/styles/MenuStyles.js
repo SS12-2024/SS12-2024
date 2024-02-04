@@ -6,8 +6,19 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center'
     },
+    menuButton: {
+        margin: 20,
+        flex: 1,
+        color: 'white',
+        fontSize:45,
+        paddingTop: 25,
+    },
     button: {
-        margin: 20
-    }
+        margin: 20,
+        flex: 1,
+        color: 'white',
+        fontSize:100,
+        paddingTop: 250,
+    },
 });
 
