@@ -1,11 +1,33 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Button, Text, AccessibilityInfo } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import entities from "../entities";
 import Physics from "../physics";
+import { DirectionContext, DirectionProvider } from "../context/Accelerometer";
+import Matter from "matter-js";
+const HandleCarVelocity = (entities, { time, x }) => {
+  if (x > 0.2) {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: 4,
+      y: 0,
+    });
+  } else if (x < -0.2) {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: -4,
+      y: 0,
+    });
+  } else {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: 0,
+      y: 0,
+    });
+  }
+  return entities;
+};
+
 const GameScreen = ({ navigation }) => {
-  // Announce screen changes for screen readers
+  const { x } = useContext(DirectionContext);
 
   useEffect(() => {
     const screenChangeAnnouncement = "Gameplay Screen.";
@@ -19,7 +41,10 @@ const GameScreen = ({ navigation }) => {
       style={{ flex: 1 }}
     >
       <GameEngine
-        systems={[Physics]}
+        systems={[
+          Physics,
+          (entities, { time }) => HandleCarVelocity(entities, { time, x }),
+        ]}
         entities={entities()}
         style={{
           position: "absolute",
