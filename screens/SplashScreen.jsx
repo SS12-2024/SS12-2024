@@ -8,7 +8,7 @@ import * as Speech from 'expo-speech';
 const SplashScreen = ({ navigation }) => {
     const speak = useTextToSpeech('Sign In');
     const speak2 = () => {
-        const thingToSay = 'You are now on the Tutorial Page';
+        const thingToSay = 'You are now on the Sign In Page';
         Speech.speak(thingToSay);
       };
     const doubleTapRef = useRef(false);
