@@ -10,7 +10,7 @@ export default (restart) => {
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
 
-  engine.gravity.y = 0;
+  engine.gravity.y = -0.00125;
 
   return {
     physics: { engine, world },
@@ -19,12 +19,6 @@ export default (restart) => {
       "green",
       { x: windowWidth / 2, y: 300 },
       { height: 40, width: 40 }
-    ),
-    Floor: Floor(
-      world,
-      "green",
-      { x: windowWidth / 2, y: windowHeight - 80 },
-      { height: 50, width: windowWidth }
     ),
   };
 };

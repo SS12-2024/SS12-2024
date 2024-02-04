@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import React from "react";
-import { View } from "react-native";
-
+import { View, Image } from "react-native";
+import Bird from "../assets/Bird.png";
 const Car = (props) => {
   const widthBody = props.body.bounds.max.x - props.body.bounds.min.x;
   const heightBody = props.body.bounds.max.y - props.body.bounds.min.y;
@@ -13,16 +13,23 @@ const Car = (props) => {
   return (
     <View
       style={{
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderWidth: 1,
         position: "absolute",
         left: xBody,
         top: yBody,
         width: widthBody,
         height: heightBody,
+        backgroundColor: "red",
       }}
-    />
+    >
+      <Image
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#f2f2f2",
+        }}
+        source={require("../assets/Bird1.png")}
+      />
+    </View>
   );
 };
 
