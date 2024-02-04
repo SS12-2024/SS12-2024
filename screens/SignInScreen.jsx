@@ -16,7 +16,7 @@ const SignInScreen = ({ navigation }) => {
     const handleLongPress = () => {
         navigation.navigate('Tutorial');
         speak2();
-      };
+    };
 
     useEffect(() => {
         const screenChangeAnnouncement = "Sign Screen";
@@ -32,7 +32,7 @@ const SignInScreen = ({ navigation }) => {
             style={buttonStyle.container}
         >
             <View>
-                <Text style={styles.button}>Go to Tutorial</Text>
+                <Text style={styles.button}>Tutorial</Text>
             </View>
         </TouchableOpacity>
     );
