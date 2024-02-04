@@ -10,7 +10,7 @@ export default (restart) => {
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
 
-  engine.gravity.y = 0.7;
+  engine.gravity.y = 0;
 
   return {
     physics: { engine, world },

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Accelerometer } from "expo-sensors";
-const DirectionContext = createContext();
+export const DirectionContext = createContext();
 
 export const DirectionProvider = ({ children }) => {
   const [{ x, y, z }, setData] = useState({
@@ -10,7 +10,7 @@ export const DirectionProvider = ({ children }) => {
   });
   const [subscription, setSubscription] = useState(null);
 
-  const _slow = () => Accelerometer.setUpdateInterval(500);
+  const _slow = () => Accelerometer.setUpdateInterval(10);
 
   const _subscribe = () => {
     setSubscription(Accelerometer.addListener(setData));
