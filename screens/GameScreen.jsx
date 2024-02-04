@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
+import useAudioPlayer from '../hooks/useAudioPlayer';
+import backgroundAudio from '../assets/audio/bg-sound.wav'
 
 // Game Object Components
 import Wall from '../components/entities/Wall';
@@ -72,6 +74,14 @@ const SpawnWalls = (entities, { time }) => {
 
 
 const GameScreen = () => {
+  const { playAudio, playKeepLoad } = useAudioPlayer(backgroundAudio);
+  console.log(backgroundAudio);
+
+  useEffect(() => {
+    if (backgroundAudio) {
+      playAudio();
+    }
+  });
 
   return (
     <GameEngine
