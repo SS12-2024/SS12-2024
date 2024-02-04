@@ -3,11 +3,12 @@ import { View, AccessibilityInfo, TouchableWithoutFeedback, Text } from 'react-n
 import useTextToSpeech from '../hooks/useTextToSpeech';
 import { buttonStyle } from './styles/buttonStyle.js';
 import { styles } from './styles/MenuStyles.js';
+import * as Speech from 'expo-speech';
 
 const MenuScreen = ({ navigation }) => {
 
     const handleLongPressStart = () => {
-        navigation.navigate('Gameplay');
+        navigation.navigate('Level');
         speakGame2();
     };
 
@@ -25,8 +26,8 @@ const MenuScreen = ({ navigation }) => {
     const speakLeaderBoard = useTextToSpeech('Long Press to Announce Leader Board');
     const speakResume = useTextToSpeech('Long Press to Resume Saved Game');  
     const speakGame2 = useTextToSpeech('Choose A Level');
-    const speakLeaderBoard2 = useTextToSpeech('Double Tap to Announce Leader Board');
-    const speakResume2 = useTextToSpeech('Double Tap to Resume Saved Game');
+    const speakLeaderBoard2 = useTextToSpeech('Long Press to Announce Leader Board');
+    const speakResume2 = useTextToSpeech('Long Press to Resume Saved Game');
 
     useEffect(() => {
         const screenChangeAnnouncement = 'Menu Screen. Select an option to continue.';

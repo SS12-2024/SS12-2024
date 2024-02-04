@@ -9,7 +9,6 @@ const useTextToSpeech = (thingToSay) => {
   useEffect(() => {
     speak();
     return () => {
-      // Cleanup logic if needed
     };
   }, [thingToSay]);
 
