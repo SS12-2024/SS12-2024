@@ -83,9 +83,18 @@ const GameScreen = () => {
   const {startGameTime,setStartGameTime}  = useGame();
   
   useEffect(()=>{
-   const starttime = Date.now();
-   console.log(starttime);
-  },[])
+    const start = Date.now();
+    let timediff = 0;
+    setTimeout(()=>{
+      timediff = Date.now() - start;
+    console.log(Math.floor(timediff/1000));
+
+    }, 2000)
+
+
+   
+  
+  })
   
   return (
     <View>
