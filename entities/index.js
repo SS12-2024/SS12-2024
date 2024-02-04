@@ -26,17 +26,5 @@ export default (restart) => {
       { x: windowWidth / 2, y: windowHeight - 80 },
       { height: 50, width: windowWidth }
     ),
-    Wall1: WallBlock(
-      world,
-      "blue",
-      { x: 0, y: 350 },
-      { height: windowHeight, width: 40 }
-    ),
-    Wall2: WallBlock(
-      world,
-      "blue",
-      { x: windowWidth, y: 350 },
-      { height: windowHeight, width: 40 }
-    ),
   };
 };
