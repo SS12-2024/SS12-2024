@@ -33,6 +33,9 @@ This project aims to create an accessible version of the popular game "Geometry 
 * Auditory cues attached to decisions/moves/options selected ​
 * Follow ADA compliance ​
 
+## Wireframe
+*<img src ="picture/image.png"> 
+
 ## What APIs do we need?
 
 * Speech Recognition
