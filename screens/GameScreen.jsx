@@ -1,17 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet,View,Text } from 'react-native';
-import { GameEngine } from 'react-native-game-engine';
+import { StatusBar } from "expo-status-bar";
+import React, { useContext, useEffect, useState } from "react";
+import { View, Button, Text, Dimensions, AccessibilityInfo } from "react-native";
+import { GameEngine } from "react-native-game-engine";
+import entities from "../entities";
+import Physics from "../physics";
+import { DirectionContext, DirectionProvider } from "../context/Accelerometer";
+import Matter from "matter-js";
 import useAudioPlayer from '../hooks/useAudioPlayer';
 import backgroundAudio from '../assets/audio/bg-sound.wav'
+
 
 // Game Object Components
 import Wall from '../components/entities/Wall';
 import { useGame } from '../context/GameContext';
 
-
-
-
 const { height: screenHeight } = Dimensions.get('window');
+
+const HandleCarVelocity = (entities, { time, x }) => {
+  if (x > 0.025) {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: 4,
+      y: 0,
+    });
+  } else if (x < -0.025) {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: -4,
+      y: 0,
+    });
+  } else {
+    Matter.Body.setVelocity(entities.Car.body, {
+      x: 0,
+      y: 0,
+    });
+  }
+  return entities;
+};
 
 // Move walls
 const MoveWalls = (entities, { time }) => {
@@ -75,12 +98,9 @@ const SpawnWalls = (entities, { time }) => {
   }
   return entities;
 };
-// const score=(startGameTime,setStartGameTime)=>{
-
-//     return (setStartGameTime-startGameTime)
-// }
 
 const GameScreen = () => {
+  const { x } = useContext(DirectionContext);
   const {startGameTime,setStartGameTime,points,setPoints}  = useGame();
   const { playAudio, playKeepLoad } = useAudioPlayer(backgroundAudio);
   console.log(backgroundAudio);
@@ -90,7 +110,6 @@ const GameScreen = () => {
       playAudio();
     }
   });
-
   
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -98,7 +117,7 @@ const GameScreen = () => {
       console.log('Timer:',startGameTime);
        // Log the timer value
     }, 1000); // Update the timer every second
-
+    
     setPoints(prevPoints => prevPoints+1);
     console.log('Point:',points);
     
@@ -106,24 +125,29 @@ const GameScreen = () => {
     return () => clearInterval(intervalId);
   }, [startGameTime]);
   
+  
   return (
     <View>
       <GameEngine
-        style={styles.container}
-        systems={[MoveWalls, SpawnWalls]}
-        entities={{
-          // Initial entities 
-        }}>
-        {/* Other UI components can be added here */}
-      </GameEngine>
+        systems={[
+          Physics,
+          (entities, { time }) => HandleCarVelocity(entities, { time, x }),
+        ]}
+        entities={entities()}
+        style={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+        }}
+      ></GameEngine>
 
+      <StatusBar style="auto" hidden={true} />
       <View style={styles.overlayContainer}>
         <Text style={styles.overlayText}>Score:{points}</Text>
       </View>
     </View>
-    
-
-
   );
 };
 
@@ -135,8 +159,6 @@ const styles = StyleSheet.create({
   overlayText: {
     fontSize: 25,
     color:'white',
-
-
   },
   overlayContainer:{
     position: 'absolute',
