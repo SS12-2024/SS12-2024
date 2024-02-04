@@ -17,7 +17,7 @@ const SplashScreen = ({ navigation }) => {
                 title="Sign In"
                 onPress={() => navigation.navigate('SignIn')}
                 buttonStyle={styles.button}
-                textStyle={{ color: 'black', fontSize: 50 }}
+                textStyle={{ color: 'white', fontSize: 50 }}
                 accessibilityLabel="Start a new game"
             />
         </View>
