@@ -13,7 +13,7 @@ export default Physics = (entities, { touches, time, dispatch }) => {
     });
 
   Matter.Events.on(engine, "collisionStart", (event) => {
-    console.log("Collison");
+    // console.log("Collsion");
   });
 
   Matter.Engine.update(engine, time.delta);

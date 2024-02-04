@@ -6,8 +6,8 @@ const WallBlock = (props) => {
   const widthBody = props.body.bounds.max.x - props.body.bounds.min.x;
   const heightBody = props.body.bounds.max.y - props.body.bounds.min.y;
 
-  const xBody = props.body.position.x - widthBody / 2;
-  const yBody = props.body.position.y - heightBody / 2;
+  const xBody = (props.body.position.x - widthBody) / 10;
+  const yBody = (props.body.position.y - heightBody) / 2;
   const color = props.color;
 
   return (
