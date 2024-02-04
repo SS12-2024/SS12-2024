@@ -7,12 +7,12 @@ import Physics from "../physics";
 import { DirectionContext, DirectionProvider } from "../context/Accelerometer";
 import Matter from "matter-js";
 const HandleCarVelocity = (entities, { time, x }) => {
-  if (x > 0.2) {
+  if (x > 0.025) {
     Matter.Body.setVelocity(entities.Car.body, {
       x: 4,
       y: 0,
     });
-  } else if (x < -0.2) {
+  } else if (x < -0.025) {
     Matter.Body.setVelocity(entities.Car.body, {
       x: -4,
       y: 0,

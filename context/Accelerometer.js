@@ -10,7 +10,7 @@ export const DirectionProvider = ({ children }) => {
   });
   const [subscription, setSubscription] = useState(null);
 
-  const _slow = () => Accelerometer.setUpdateInterval(10);
+  const _slow = () => Accelerometer.setUpdateInterval(0);
 
   const _subscribe = () => {
     setSubscription(Accelerometer.addListener(setData));
