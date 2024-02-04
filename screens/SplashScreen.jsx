@@ -3,15 +3,22 @@ import { View, AccessibilityInfo } from 'react-native';
 import CustomButton from '../components/common/CustomButton';
 import { appStyles } from './styles/appStyles.js';
 import useTextToSpeech from '../hooks/useTextToSpeech';
+import * as Speech from 'expo-speech';
 
 const SplashScreen = ({ navigation }) => {
-    const speak = useTextToSpeech('Sign In Button');
+    const speak = useTextToSpeech('Sign In');
+    const speak2 = () => {
+        const thingToSay = 'You are now on the Tutorial Page';
+        Speech.speak(thingToSay);
+      };
     const doubleTapRef = useRef(false);
 
     const handleButtonPress = () => {
         if (doubleTapRef.current) {
             // On the second tap, navigate to the SignIn screen
             navigation.navigate('SignIn');
+            speak2();
+
         } else {
             // On the first tap, speak the accessibility label
             speak();
