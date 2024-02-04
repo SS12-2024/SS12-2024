@@ -143,6 +143,7 @@ const GameScreen = ({ navigation }) => {
 
 
   const speak = useTextToSpeech(points.toString());
+  const speakGameOver = useTextToSpeech("You Win");
 
   useEffect(() => {
     setPoints(0);
@@ -170,6 +171,7 @@ const GameScreen = ({ navigation }) => {
 
     if (points == 25) {
       setRunning(false);
+      speakGameOver();
       navigation.navigate("Menu");
     }
 
