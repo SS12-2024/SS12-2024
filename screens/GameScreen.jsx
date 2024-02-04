@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet,View,Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 import useAudioPlayer from '../hooks/useAudioPlayer';
 import backgroundAudio from '../assets/audio/bg-sound.wav'
 
 // Game Object Components
 import Wall from '../components/entities/Wall';
-import { useGame } from '../context/GameContext';
+import Player from '../components/entities/Player'
 
 
-
-
-const { height: screenHeight } = Dimensions.get('window');
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 // Move walls
 const MoveWalls = (entities, { time }) => {
@@ -28,7 +26,6 @@ const MoveWalls = (entities, { time }) => {
   });
   return newEntities;
 };
-
 
 // Spawn walls
 let lastSpawnTime = Date.now();
@@ -75,55 +72,40 @@ const SpawnWalls = (entities, { time }) => {
   }
   return entities;
 };
-// const score=(startGameTime,setStartGameTime)=>{
 
-//     return (setStartGameTime-startGameTime)
-// }
+let lastPlayerSpawnTime = Date.now();
+const SpawnPlayer = (entities, { time }) => {
+  let currentTime = Date.now();
+  if (currentTime - lastPlayerSpawnTime > 1) {
+    const playerPos = screenWidth / 2;
+    const wallIdBase = "696969";
+
+    // Adding player to list of entities
+    entities[`player_${wallIdBase}`] = {
+      type: 'wall',
+      position: { x: playerPos, y: screenHeight / 1.4 },
+      size: { width: 50, height: 50 },
+      renderer: <Player />
+    };
+
+    lastPlayerSpawnTime = currentTime;
+  }
+  return entities;
+};
+
 
 const GameScreen = () => {
-  const {startGameTime,setStartGameTime,points,setPoints}  = useGame();
-  const { playAudio, playKeepLoad } = useAudioPlayer(backgroundAudio);
-  console.log(backgroundAudio);
 
-  useEffect(() => {
-    if (backgroundAudio) {
-      playAudio();
-    }
-  });
 
-  
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setStartGameTime(prevTimer => prevTimer + 1);
-      console.log('Timer:',startGameTime);
-       // Log the timer value
-    }, 1000); // Update the timer every second
-
-    setPoints(prevPoints => prevPoints+1);
-    console.log('Point:',points);
-    
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [startGameTime]);
-  
   return (
-    <View>
-      <GameEngine
-        style={styles.container}
-        systems={[MoveWalls, SpawnWalls]}
-        entities={{
-          // Initial entities 
-        }}>
-        {/* Other UI components can be added here */}
-      </GameEngine>
-
-      <View style={styles.overlayContainer}>
-        <Text style={styles.overlayText}>Score:{points}</Text>
-      </View>
-    </View>
-    
-
-
+    <GameEngine
+      style={styles.container}
+      systems={[MoveWalls, SpawnWalls, SpawnPlayer]}
+      entities={{
+        // Initial entities 
+      }}>
+      {/* Other UI components can be added here */}
+    </GameEngine>
   );
 };
 
@@ -132,20 +114,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  overlayText: {
-    fontSize: 25,
-    color:'white',
-
-
-  },
-  overlayContainer:{
-    position: 'absolute',
-    top:0,
-    left:0,
-    right:0,
-    alignItems:'center',
-    paddingTop:30,
-  }
 });
 
 export default GameScreen;
