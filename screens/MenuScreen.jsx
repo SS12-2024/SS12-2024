@@ -25,17 +25,17 @@ const MenuScreen = ({ navigation }) => {
     const speakResume = useTextToSpeech('Double Tap to Resume Saved Game');
 
     const speakGame2 = () => {
-        const thingToSay = 'Double Tap to start game';
+        const thingToSay = 'Start game';
         Speech.speak(thingToSay);
     };
 
     const speakLeaderBoard2 = () => {
-        const sayLeaderBoard = 'Double Tap to Announce Leader Board';
+        const sayLeaderBoard = 'Announce Leader Board';
         Speech.speak(sayLeaderBoard);
     };
 
     const speakResume2 = () => {
-        const sayLeaderBoard = 'Double Tap to resume game';
+        const sayLeaderBoard = 'Resume game';
         Speech.speak(sayLeaderBoard);
     };
 
