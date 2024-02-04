@@ -80,14 +80,19 @@ const SpawnWalls = (entities, { time }) => {
 
 
 const GameScreen = () => {
-  const {startGameTime,setStartGameTime}  = useGame();
+  const {startGameTime,setStartGameTime,points,setPoints}  = useGame();
+
   
   useEffect(() => {
     const intervalId = setInterval(() => {
       setStartGameTime(prevTimer => prevTimer + 1);
-      console.log('Timer:',startGameTime); // Log the timer value
+      console.log('Timer:',startGameTime);
+       // Log the timer value
     }, 1000); // Update the timer every second
 
+    setPoints(prevPoints => prevPoints+1);
+    console.log('Point:',points);
+    
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [startGameTime]);
@@ -104,7 +109,7 @@ const GameScreen = () => {
       </GameEngine>
 
       <View style={styles.overlayContainer}>
-        <Text style={styles.overlayText}>Score: 100</Text>
+        <Text style={styles.overlayText}>Score:{points}</Text>
       </View>
     </View>
     
@@ -119,8 +124,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   overlayText: {
-    fontSize: 12,
+    fontSize: 25,
     color:'white',
+
 
   },
   overlayContainer:{
