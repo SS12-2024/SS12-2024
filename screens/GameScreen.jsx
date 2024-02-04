@@ -15,10 +15,12 @@ import { DirectionContext, DirectionProvider } from "../context/Accelerometer";
 import Matter, { use } from "matter-js";
 import useAudioPlayer from "../hooks/useAudioPlayer";
 import backgroundAudio from "../assets/audio/bg-sound.wav";
+import useTextToSpeech from "../hooks/useTextToSpeech";
 
 // Game Object Components
 import Wall from "../components/entities/Wall";
 import { useGame } from "../context/GameContext";
+
 
 const { height: screenHeight } = Dimensions.get("window");
 
@@ -58,6 +60,7 @@ const MoveWalls = (entities, { time }) => {
   return newEntities;
 };
 
+
 // Spawn walls
 let lastSpawnTime = Date.now();
 
@@ -68,7 +71,7 @@ const SpawnWalls = (entities, { time }) => {
   if (currentTime - lastSpawnTime > 50) {
     const gapSize = 175;
     const wallHeight = screenHeight / 35;
-    const randomNum = Math.floor(Math.random() * 100) - 100;
+    const randomNum = Math.floor(Math.random() * 200) - 50;
     const divisor = 3;
     let leftWidth = 0;
     if (SpawnWalls.prevLeftWidth - randomNum > 100) {
@@ -138,6 +141,9 @@ const GameScreen = ({ navigation }) => {
   const [gameEngine, setGameEngine] = useState(null);
   console.log(backgroundAudio);
 
+
+  const speak = useTextToSpeech(points.toString());
+
   useEffect(() => {
     setPoints(0);
   }, []);
@@ -157,6 +163,10 @@ const GameScreen = ({ navigation }) => {
 
     setPoints((prevPoints) => prevPoints + 1);
     console.log("Point:", points);
+    if (points % 10 == 0) {
+      speak();
+      // useTextToSpeech(points.toString())
+    }
 
     if (points == 25) {
       setRunning(false);
@@ -195,6 +205,8 @@ const GameScreen = ({ navigation }) => {
   );
 };
 
+export default GameScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -213,5 +225,3 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
 });
-
-export default GameScreen;

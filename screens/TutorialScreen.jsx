@@ -1,53 +1,40 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Button, Text, AccessibilityInfo } from 'react-native';
+import { View, Text, AccessibilityInfo, TouchableOpacity } from 'react-native';
 import { styles } from './styles/MenuStyles.js'
-import CustomButton from '../components/common/CustomButton';
-import { appStyles } from './styles/appStyles.js';
+import { buttonStyle } from './styles/buttonStyle.js';
 import useTextToSpeech from '../hooks/useTextToSpeech';
 import * as Speech from 'expo-speech';
 
-
 const TutorialScreen = ({ navigation }) => {
     // Announce screen changes for screen readers
-    const speak = useTextToSpeech('Go To Main Menu');
+    const speak = useTextToSpeech('Long-press anywhere to go to menu');
     const speak2 = () => {
-        const thingToSay = 'You are now on the Main Menu';
+        const thingToSay = 'You are now on the main menu';
         Speech.speak(thingToSay);
     };
-    const doubleTapRef = useRef(false);
-
-    const handleButtonPress = () => {
-        if (doubleTapRef.current) {
-            // On the second tap, navigate to the SignIn screen
-            navigation.navigate('Menu');
-            speak2();
-
-        } else {
-            // On the first tap, speak the accessibility label
-            speak();
-            doubleTapRef.current = true;
-
-            // Reset double tap after a short delay (adjust as needed)
-            setTimeout(() => {
-                doubleTapRef.current = false;
-            }, 500);
-        }
+    
+    const handleLongPress = () => {
+        navigation.navigate('Menu');
+        speak2();
     };
+
     useEffect(() => {
         const screenChangeAnnouncement = "Tutorial Screen.";
         AccessibilityInfo.announceForAccessibility(screenChangeAnnouncement);
     }, []);
 
     return (
-        <View accessible={true}  accessibilityLabel="Tutorial Screen" style={appStyles.container}>
-            <CustomButton
-                title="Go to Menu Screen"
-                onPress={handleButtonPress}
-                buttonStyle={styles.button}
-                textStyle={{ color: 'white', fontSize: 50 }}
-                accessibilityLabel="Go to Menu"
-            />
-        </View>
+        <TouchableOpacity
+            accessible={true}
+            accessibilityLabel="Tutorial Screen"
+            onPress={speak}
+            onLongPress={handleLongPress}
+            style={buttonStyle.container}
+        >
+            <View>
+                <Text style={styles.button}>Main Menu</Text>
+            </View>
+        </TouchableOpacity>
     );
 };
 
