@@ -13,7 +13,7 @@ const MenuScreen = ({ navigation }) => {
     };
 
     const handleLongPressLeader = () => {
-        navigation.navigate('LeaderBoard');
+        Speech.stop();
         speakLeaderBoard2();
     };
 
@@ -26,10 +26,11 @@ const MenuScreen = ({ navigation }) => {
     const speakLeaderBoard = useTextToSpeech('Long Press to Announce Leader Board');
     const speakResume = useTextToSpeech('Long Press to Resume Saved Game');  
     const speakGame2 = useTextToSpeech('Choose A Level');
-    const speakLeaderBoard2 = useTextToSpeech('Long Press to Announce Leader Board');
+    const speakLeaderBoard2 = useTextToSpeech('First place: Tom, 56 points. Second place: Ben, 45 points. Third place: Emily, 40 points.');
     const speakResume2 = useTextToSpeech('Long Press to Resume Saved Game');
 
     useEffect(() => {
+        Speech.stop();
         const screenChangeAnnouncement = 'Menu Screen. Select an option to continue.';
         AccessibilityInfo.announceForAccessibility(screenChangeAnnouncement);
     }, []);
