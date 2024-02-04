@@ -82,19 +82,15 @@ const SpawnWalls = (entities, { time }) => {
 const GameScreen = () => {
   const {startGameTime,setStartGameTime}  = useGame();
   
-  useEffect(()=>{
-    const start = Date.now();
-    let timediff = 0;
-    setTimeout(()=>{
-      timediff = Date.now() - start;
-    console.log(Math.floor(timediff/1000));
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setStartGameTime(prevTimer => prevTimer + 1);
+      console.log('Timer:',startGameTime); // Log the timer value
+    }, 1000); // Update the timer every second
 
-    }, 2000)
-
-
-   
-  
-  })
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [startGameTime]);
   
   return (
     <View>
