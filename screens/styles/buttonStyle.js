@@ -10,6 +10,14 @@ export const buttonStyle = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#1F1A38',
   },
+  levelContainer: {
+    flex: 1,
+    alignItems: 'column',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1F1A38',
+  },
   fullScreenButton: {
     display: 'flex',
     height: screenHeight,
