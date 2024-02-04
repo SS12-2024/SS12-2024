@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, AccessibilityInfo, TouchableWithoutFeedback, Text } from 'react-native';
 import { buttonStyle } from './styles/buttonStyle.js';
+import { styles } from './styles/MenuStyles.js'
 import useTextToSpeech from '../hooks/useTextToSpeech';
 
 const SplashScreen = ({ navigation }) => {
-  const speak = useTextToSpeech('Welcome to Sound Dash!!!!    Tap anywhere to learn more, and long-tap to confirm.');
+  const speak = useTextToSpeech('Welcome to Sound Dash!!!!    Tap anywhere to learn more, and long-press to confirm.');
   const speak2 = useTextToSpeech('You are now on the sign-in page');
 
   const handleLongPress = () => {
@@ -25,9 +26,9 @@ const SplashScreen = ({ navigation }) => {
         textStyle={{ color: 'white', fontSize: 50 }}
         accessibilityLabel="Start a new game"
         onLongPress={handleLongPress}
-        style={buttonStyle.fullScreenButton} 
+        style={buttonStyle.container} 
       >
-        <Text style={buttonStyle.buttonText}>Sign In</Text>
+        <Text style={styles.button}>Sign In</Text>
       </TouchableWithoutFeedback>
     </View>
   );
