@@ -1,7 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, AccessibilityInfo, Dimensions } from 'react-native';
+import { TouchableWithoutFeedback, Text, StyleSheet, AccessibilityInfo, Dimensions } from 'react-native';
+import useTextToSpeech from '../../hooks/useTextToSpeech';
 
-const CustomButton = ({ title, onPress, buttonStyle, textStyle, accessibilityLabel }) => {
+const CustomButton = ({ title, onPress, onLongPress, thingToSay, buttonStyle, textStyle, accessibilityLabel }) => {
     const announceAccessibilityLabel = accessibilityLabel || title;
 
     const handlePress = () => {
@@ -9,16 +10,17 @@ const CustomButton = ({ title, onPress, buttonStyle, textStyle, accessibilityLab
         onPress();
     };
 
+    const speak = useTextToSpeech(thingToSay);
+
     return (
-        <TouchableOpacity
-            onPress={handlePress}
-            style={[styles.button, buttonStyle]}
-            accessibilityLabel={announceAccessibilityLabel}
-        >
-            <Text style={[styles.text, textStyle]}>{title}</Text>
-        </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={handlePress} onLongPress={onLongPress}>
+            <Text style={[styles.button, buttonStyle]} accessibilityLabel={announceAccessibilityLabel}>
+                {title}
+            </Text>
+        </TouchableWithoutFeedback>
     );
 };
+
 const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
@@ -29,19 +31,11 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         padding: 0,
-        flex:1,
+        flex: 1,
         backgroundColor: '#1F1A38', // Dark purple
-    },
-    text: {
         fontSize: 25,
-        color: 'white'
+        color: 'white',
     },
 });
 
 export default CustomButton;
-
-/** 
- * @module CustomButton
- * component that returns a customizable button.
- * @returns {component} Returns customized TouchableOpacity component with Text inside.
- */
