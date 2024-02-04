@@ -1,6 +1,4 @@
-Great project planning! Here's a structured readme for your CSUN Hackathon project:
 
----
 
 # Team One: CSUN Hackathon Project
 
@@ -34,6 +32,9 @@ This project aims to create an accessible version of the popular game "Geometry 
 * Multiple levels and difficulties ​
 * Auditory cues attached to decisions/moves/options selected ​
 * Follow ADA compliance ​
+
+## Wireframe
+*<img src ="picture/image.png"> 
 
 ## What APIs do we need?
 

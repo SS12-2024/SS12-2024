@@ -7,6 +7,9 @@ export const useGame = () => useContext(GameContext);
 export function GameProvider({ children }) {
     // Placeholder for user settings (for now)
     const [userSettings, setUserSettings] = useState({});
+    const [prevLeftWidth, setPrevLeftWidth] = useState(0);
+    const [startGameTime, setStartGameTime] = useState(0);
+    const [points, setPoints] = useState(0);
 
     // Load user settings from storage or backend
     const loadUserSettings = async () => {
@@ -17,6 +20,13 @@ export function GameProvider({ children }) {
         userSettings,
         setUserSettings,
         loadUserSettings,
+        prevLeftWidth,
+        setPrevLeftWidth,
+        startGameTime,
+        setStartGameTime,
+        points,
+        setPoints
+
     };
 
     return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
