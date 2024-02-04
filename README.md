@@ -1,6 +1,4 @@
-Great project planning! Here's a structured readme for your CSUN Hackathon project:
 
----
 
 # Team One: CSUN Hackathon Project
 
