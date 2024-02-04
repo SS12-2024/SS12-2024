@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, AccessibilityInfo, TouchableOpacity } from 'react-native';
 import { styles } from './styles/MenuStyles.js'
 import { buttonStyle } from './styles/buttonStyle.js';
@@ -9,7 +9,7 @@ const SignInScreen = ({ navigation }) => {
     // Announce screen changes for screen readers
     const speak = useTextToSpeech('Long-press anywhere on the screen to start the tutorial');
     const speak2 = () => {
-        const thingToSay = 'Tutorial has Started';
+        const thingToSay = 'Tutorial has Started. Tilt your device to the left or right to move the player in that direction and navigate through the maze and avoid the walls. The music will intensify as you approach a wall.Tap once to pause the game ';
         Speech.speak(thingToSay);
     };
    
