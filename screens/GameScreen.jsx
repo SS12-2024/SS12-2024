@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, StyleSheet,View,Text } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 import useAudioPlayer from '../hooks/useAudioPlayer';
 import backgroundAudio from '../assets/audio/bg-sound.wav'
 
 // Game Object Components
 import Wall from '../components/entities/Wall';
+import { useGame } from '../context/GameContext';
+
+
 
 
 const { height: screenHeight } = Dimensions.get('window');
@@ -25,6 +28,7 @@ const MoveWalls = (entities, { time }) => {
   });
   return newEntities;
 };
+
 
 // Spawn walls
 let lastSpawnTime = Date.now();
@@ -71,9 +75,13 @@ const SpawnWalls = (entities, { time }) => {
   }
   return entities;
 };
+// const score=(startGameTime,setStartGameTime)=>{
 
+//     return (setStartGameTime-startGameTime)
+// }
 
 const GameScreen = () => {
+  const {startGameTime,setStartGameTime,points,setPoints}  = useGame();
   const { playAudio, playKeepLoad } = useAudioPlayer(backgroundAudio);
   console.log(backgroundAudio);
 
@@ -83,15 +91,39 @@ const GameScreen = () => {
     }
   });
 
+  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setStartGameTime(prevTimer => prevTimer + 1);
+      console.log('Timer:',startGameTime);
+       // Log the timer value
+    }, 1000); // Update the timer every second
+
+    setPoints(prevPoints => prevPoints+1);
+    console.log('Point:',points);
+    
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [startGameTime]);
+  
   return (
-    <GameEngine
-      style={styles.container}
-      systems={[MoveWalls, SpawnWalls]}
-      entities={{
-        // Initial entities 
-      }}>
-      {/* Other UI components can be added here */}
-    </GameEngine>
+    <View>
+      <GameEngine
+        style={styles.container}
+        systems={[MoveWalls, SpawnWalls]}
+        entities={{
+          // Initial entities 
+        }}>
+        {/* Other UI components can be added here */}
+      </GameEngine>
+
+      <View style={styles.overlayContainer}>
+        <Text style={styles.overlayText}>Score:{points}</Text>
+      </View>
+    </View>
+    
+
+
   );
 };
 
@@ -100,6 +132,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  overlayText: {
+    fontSize: 25,
+    color:'white',
+
+
+  },
+  overlayContainer:{
+    position: 'absolute',
+    top:0,
+    left:0,
+    right:0,
+    alignItems:'center',
+    paddingTop:30,
+  }
 });
 
 export default GameScreen;
